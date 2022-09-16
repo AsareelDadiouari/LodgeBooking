@@ -12,5 +12,8 @@
         <module name="TP1_Reservation" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="TP1_Reservation" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
