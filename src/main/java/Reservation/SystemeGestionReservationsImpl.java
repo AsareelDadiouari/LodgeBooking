@@ -12,6 +12,8 @@ import Reservation.interfaces.SystemeGestionReservations;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class SystemeGestionReservationsImpl implements SystemeGestionReservations {
     private SystemeGestionReservations bookingBuilder;
@@ -49,16 +51,62 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
     @Override
     public void reservationImpl() {
         clearScreen();
-        List<ClientInfoGathering> clientRequests = database.getClientInfoGatheringList();
+        List<ClientInfoGathering> clientRequests = null;
+        Scanner sc = new Scanner(System.in);
+
         while (true){
+            clientRequests = database.getClientInfoGatheringList();
+
             if(clientRequests.isEmpty()){
                 System.out.println("Impossible de faire une reservation" +
                         ", aucune demande en attente");
+                System.out.println("Appuyer pour revenir en arriere");
+                sc.nextLine();
                 break;
             }
-            clientRequests.forEach(req -> {
-                System.out.println("fefe");
-            });
+
+            List<ClientInfoGathering> unfulfilledRequests = clientRequests.stream().filter(req -> !req.isFulfilled()).collect(Collectors.toList());
+            if (!unfulfilledRequests.isEmpty())
+            {
+                System.out.println("\t--- DEMANDES EN ATTENTES ---");
+                AtomicInteger clientIndex = new AtomicInteger();
+                unfulfilledRequests.forEach(req -> {
+                    System.out.println("\t\t--- [" + clientIndex.getAndIncrement() + "] ---");
+                    System.out.println(req);
+                });
+
+                System.out.print("Choix client : ");
+                int clientChoiceNumber = Integer.parseInt(sc.next());
+                ClientInfoGathering chosenClient;
+                try {
+                    chosenClient = clientRequests.get(clientChoiceNumber);
+                }catch (Exception e){
+                    e.printStackTrace();
+                    break;
+                }
+                clearScreen();
+
+                assert chosenClient != null;
+                System.out.println("[" + chosenClient.getClient().getFullName() + "]");
+
+                System.out.print("Chercher un hébergement pour ce client ? (oui/non) ");
+                switch (sc.next()){
+                    case "oui" :
+                        searchForBooking(chosenClient);
+                        break;
+                    case "non" :
+                        database.setClientDemandState(false, chosenClient.getId());
+                        break;
+                    default:
+                        System.out.println("Incorrect choice");
+                        break;
+                }
+            }else {
+                System.out.println("Aucune demande de reservations en attente," +
+                        " appuyer pour quittter");
+                sc.nextLine();
+                break;
+            }
         }
     }
 
@@ -66,9 +114,13 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
     public void addClient() {
         clearScreen();
         ClientInfoGathering clientInfos = clientMain.gatherInfo();
+        database.addLodgeAddress(clientInfos.getLodgeAddress(), 0);
 
         if (clientMain.saveClientInfoQuestion())
             database.addClient(clientInfos.getClient());
+
+        if(clientMain.saveClientRequest())
+            database.addClientInfoGathering(clientInfos);
     }
 
     @Override
@@ -79,6 +131,13 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
 
         if (lodgeMain.saveInfos())
             database.addLodge(lodge);
+    }
+
+    @Override
+    public boolean searchForBooking(ClientInfoGathering client) {
+
+
+        return false;
     }
 
     public void Start() {
@@ -105,8 +164,7 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
                         clearScreen();
                         break;
                     case "6":
-                        clearScreen();
-                        break;
+                        return;
                 }
             }
         }catch (Exception e){

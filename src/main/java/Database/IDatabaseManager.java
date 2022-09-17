@@ -43,5 +43,7 @@ public interface IDatabaseManager {
 
     List<ClientInfoGathering> getClientInfoGatheringList();
     public void addWantedServices(Set<String> wantedService, String clientEmail);
+    public Set<String> getListOfWantedServicesByClientId(String clientEmail);
 
+    public void setClientDemandState(boolean state,  int clientInfo);
 }

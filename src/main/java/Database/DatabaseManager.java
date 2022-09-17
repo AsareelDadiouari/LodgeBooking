@@ -344,11 +344,14 @@ public class DatabaseManager implements IDatabaseManager {
                 clientInfoGathering.setId(resultSet.getInt("id"));
                 clientInfoGathering.setTypeOfLodge(LodgeType.valueOf(resultSet.getString("typeOfLodge")));
                 clientInfoGathering.setRoomType(RoomType.valueOf(resultSet.getString("roomType")));
-                clientInfoGathering.setCheckIn(LocalDate.parse(resultSet.getString("checkIn")));
-                clientInfoGathering.setCheckOut(LocalDate.parse(resultSet.getString("checkOut")));
+                if (!resultSet.getString("checkIn").isEmpty())
+                    clientInfoGathering.setCheckIn(LocalDate.parse(resultSet.getString("checkIn")));
+                if (!resultSet.getString("checkOut").isEmpty())
+                    clientInfoGathering.setCheckOut(LocalDate.parse(resultSet.getString("checkOut")));
                 clientInfoGathering.setMaximumPriceToPay(resultSet.getDouble("maximumPrice"));
                 clientInfoGathering.setParticularNeed(resultSet.getString("particularNeed"));
                 clientInfoGathering.setFulfilled(resultSet.getBoolean("isFulfilled"));
+                clientInfoGathering.setWantedServices(getListOfWantedServicesByClientId(resultSet.getString("clientId")));
             }
 
             /*PreparedStatement statement = connection.prepareStatement(sql);
@@ -374,10 +377,38 @@ public class DatabaseManager implements IDatabaseManager {
 
     public Set<String> getListOfWantedServicesByClientId(String clientEmail){
         Set<String> wantedServices = new HashSet<>();
-        String sql = "SELECT";
+        String sql = "SELECT service FROM WantedServices WHERE clientId = ?";
 
+        try{
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, clientEmail);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next())
+                wantedServices.add(resultSet.getString("service"));
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         return wantedServices;
+    }
+
+    @Override
+    public void setClientDemandState(boolean state, int clientInfo) {
+        String sql = "UPDATE ClientInfoGathering " +
+                "SET isFulfilled = ? WHERE id = ?";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setBoolean(1, state);
+            statement.setInt(2, clientInfo);
+
+            statement.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void addClientInfoGathering(ClientInfoGathering clientInfoGathering){
@@ -391,8 +422,8 @@ public class DatabaseManager implements IDatabaseManager {
             statement.setInt(3, clientInfoGathering.getId());
             statement.setString(4, clientInfoGathering.getTypeOfLodge().toString());
             statement.setString(5, clientInfoGathering.getRoomType().toString());
-            statement.setString(6, clientInfoGathering.getCheckIn().toString());
-            statement.setString(7, clientInfoGathering.getCheckOut().toString());
+            statement.setString(6, clientInfoGathering.getCheckIn() == null ? "" : clientInfoGathering.getCheckIn().toString());
+            statement.setString(7, clientInfoGathering.getCheckOut() == null ? "" : clientInfoGathering.getCheckOut().toString());
             statement.setDouble(8, clientInfoGathering.getMaximumPriceToPay());
             statement.setString(9, clientInfoGathering.getParticularNeed());
             statement.setBoolean(10, clientInfoGathering.isFulfilled());
@@ -425,7 +456,18 @@ public class DatabaseManager implements IDatabaseManager {
     }
 
     private void addSingleWantedService(String service, String clientEmail){
-        
+        String sql = "INSERT INTO WantedServices(id, clientId, service) VALUES (?,?,?)";
+
+        try{
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, new SecureRandom().nextInt());
+            statement.setString(2, clientEmail);
+            statement.setString(3, service);
+
+            statement.executeUpdate();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void addClient(Client client) {
@@ -472,7 +514,7 @@ public class DatabaseManager implements IDatabaseManager {
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, new SecureRandom().nextInt(Integer.MAX_VALUE));
+            statement.setInt(1, lodgeAddress.getId());
             statement.setString(2, lodgeAddress.getProvince());
             statement.setString(3, lodgeAddress.getCity());
             statement.setString(4, lodgeAddress.getFullAddress());

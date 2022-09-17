@@ -7,6 +7,7 @@ import Lodge.entities.RoomType;
 import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -44,11 +45,11 @@ public class ClientInfoGathering {
      * @param particularNeed    Besoins particuliers
      */
     public ClientInfoGathering(Client client, LodgeType typeOfLodge,
-                               RoomType roomType, Set<String> wantedServices,
-                               LocalDate checkIn, LocalDate checkOut, LodgeAddress lodgeAddress,
-                               double maximumPriceToPay, String particularNeed) {
-        this.checkIn = checkIn;
-        this.checkOut = checkOut;
+                               RoomType roomType, Set<String> wantedServices, LodgeAddress lodgeAddress,
+                               double maximumPriceToPay, String particularNeed,
+                               Optional<LocalDate> checkIn, Optional<LocalDate> checkOut) {
+        checkIn.ifPresent(localDate -> this.checkIn = localDate);
+        checkOut.ifPresent(localDate -> this.checkOut = localDate);
         this.wantedServices = wantedServices;
         this.roomType = roomType;
         this.client = client;
@@ -145,5 +146,17 @@ public class ClientInfoGathering {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+
+        return "" + "[Nom Client : " + client.getFullName() + "]\n" +
+                "[Type d'hébergement recherché : " + typeOfLodge.name() + "]\n" +
+                "[Type de chambres recherché : " + roomType.name() + "]\n" +
+                "[Prix Maximum de la chambre : " + maximumPriceToPay + "]\n" +
+                "[Date d'entrée : " + ((checkIn == null) ? "" : checkIn.toString()) + "]\n" +
+                "[Date de sortie : " + ((checkOut == null) ? "" : checkOut.toString()) + "]\n" +
+                "[Address : " + lodgeAddress.getCityCountry() + "]\n";
     }
 }

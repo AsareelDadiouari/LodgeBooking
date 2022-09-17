@@ -5,6 +5,7 @@ import Lodge.entities.LodgeService;
 import Lodge.entities.LodgeType;
 import Lodge.entities.RoomType;
 
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -120,6 +121,14 @@ public class ClientMain {
 
         sc.nextLine();
 
+        System.out.println("Date d'entrée souhaité : (AAAA-MM-JJ) ");
+        clientInfo.setCheckIn(LocalDate.parse(sc.next()));
+
+        System.out.println("Date de sortie souhaité : (AAAA-MM-JJ)");
+        clientInfo.setCheckOut(LocalDate.parse(sc.next()));
+
+        sc.nextLine();
+
         System.out.println("Besoin particuliers : ");
         clientInfo.setParticularNeed(sc.nextLine());
 
@@ -129,7 +138,14 @@ public class ClientMain {
     public boolean saveClientInfoQuestion() {
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Avez vous terminer ? (oui/non) :");
+        System.out.print("Sauvegarder vos données ? (oui/non) :");
+        return Objects.equals(sc.next(), "oui");
+    }
+
+    public boolean saveClientRequest() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Voulez vous envoyer votre demande ? (oui/non) :");
         return Objects.equals(sc.next(), "oui");
     }
 }

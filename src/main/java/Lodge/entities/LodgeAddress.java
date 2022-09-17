@@ -1,5 +1,7 @@
 package Lodge.entities;
 
+import java.security.SecureRandom;
+
 /**
  * Représente l'adresse de l'hébergement
  */
@@ -9,7 +11,7 @@ public class LodgeAddress {
     private String province, city, fullAddress, country;
 
     public LodgeAddress() {
-
+        id = new SecureRandom().nextInt();
     }
 
     public LodgeAddress(int id, String province, String city, String fullAddress, String country) {
@@ -33,7 +35,11 @@ public class LodgeAddress {
     }
 
     public String getFullAddress() {
-        return fullAddress;
+        return fullAddress + "," + city + "," + province + "," + country;
+    }
+
+    public String getCityCountry(){
+        return city + "," + country;
     }
 
     public String getProvince() {
