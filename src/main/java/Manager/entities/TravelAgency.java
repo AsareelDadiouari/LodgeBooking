@@ -1,5 +1,7 @@
 package Manager.entities;
 
+import Reservation.entities.BookingRecord;
+
 import java.util.List;
 import java.util.Optional;
 

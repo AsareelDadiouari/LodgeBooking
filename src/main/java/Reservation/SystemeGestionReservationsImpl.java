@@ -8,9 +8,11 @@ import Lodge.LodgeMain;
 import Lodge.entities.Lodge;
 import Lodge.entities.LodgeInfo;
 import Reservation.entities.Booking;
+import Reservation.entities.BookingState;
 import Reservation.interfaces.SystemeGestionReservations;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -20,11 +22,14 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
     private final IDatabaseManager database;
     private final ClientMain clientMain;
     private final LodgeMain lodgeMain;
+    private final BookingMain bookingMain;
+    private String managerName;
 
     public SystemeGestionReservationsImpl() {
         database = new DatabaseManager();
         clientMain = new ClientMain();
         lodgeMain = new LodgeMain();
+        bookingMain = new BookingMain((DatabaseManager) database);
     }
 
     @Override
@@ -79,7 +84,7 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
                 int clientChoiceNumber = Integer.parseInt(sc.next());
                 ClientInfoGathering chosenClient;
                 try {
-                    chosenClient = clientRequests.get(clientChoiceNumber);
+                    chosenClient = unfulfilledRequests.get(clientChoiceNumber);
                 }catch (Exception e){
                     e.printStackTrace();
                     break;
@@ -92,7 +97,19 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
                 System.out.print("Chercher un hébergement pour ce client ? (oui/non) ");
                 switch (sc.next()){
                     case "oui" :
-                        searchForBooking(chosenClient);
+                        Booking foundBooking = bookingMain.searchForBooking(chosenClient);
+
+                        if (foundBooking != null){
+                            System.out.println("Voulez vous effectuer la reservation ? (oui/non) ");
+
+                            if (Objects.equals(sc.next(), "oui")){
+                                System.out.println("ID : " + foundBooking.getId());
+                                if (database.setBookingState(foundBooking.getId(), BookingState.CONFIRMED))
+                                    database.setClientDemandState(true, chosenClient.getId());
+                            }
+
+                        } else
+                            System.out.println("Reservation non confirmée");
                         break;
                     case "non" :
                         database.setClientDemandState(false, chosenClient.getId());
@@ -124,20 +141,13 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
     }
 
     @Override
-    public void addLodgeInformations() {
+    public void addLodgeInformation() {
         clearScreen();
         LodgeInfo lodgeInfo = lodgeMain.gatherInfos();
         Lodge lodge = lodgeMain.getLodge();
 
         if (lodgeMain.saveInfos())
             database.addLodge(lodge);
-    }
-
-    @Override
-    public boolean searchForBooking(ClientInfoGathering client) {
-
-
-        return false;
     }
 
     public void Start() {
@@ -152,7 +162,7 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
                         addClient();
                         break;
                     case "2":
-                        addLodgeInformations();
+                        addLodgeInformation();
                         break;
                     case "3":
                         reservationImpl();

@@ -138,14 +138,14 @@ public class ClientMain {
     public boolean saveClientInfoQuestion() {
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Sauvegarder vos données ? (oui/non) :");
+        System.out.print("Sauvegarder vos données ? (oui/non) : ");
         return Objects.equals(sc.next(), "oui");
     }
 
     public boolean saveClientRequest() {
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Voulez vous envoyer votre demande ? (oui/non) :");
+        System.out.print("Voulez vous envoyer votre demande ? (oui/non) : ");
         return Objects.equals(sc.next(), "oui");
     }
 }

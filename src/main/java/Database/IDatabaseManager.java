@@ -6,8 +6,9 @@ import Lodge.entities.Lodge;
 import Lodge.entities.LodgeAddress;
 import Lodge.entities.LodgeInfo;
 import Lodge.entities.Room;
-import Manager.entities.BookingRecord;
 import Manager.entities.TravelAgency;
+import Reservation.entities.BookingRecord;
+import Reservation.entities.BookingState;
 
 import java.util.List;
 import java.util.Set;
@@ -42,8 +43,15 @@ public interface IDatabaseManager {
     public void addClientInfoGathering(ClientInfoGathering clientInfoGathering);
 
     List<ClientInfoGathering> getClientInfoGatheringList();
+
     public void addWantedServices(Set<String> wantedService, String clientEmail);
+
     public Set<String> getListOfWantedServicesByClientId(String clientEmail);
 
     public void setClientDemandState(boolean state,  int clientInfo);
+
+    public LodgeInfo findLodgeFromClientDemands(ClientInfoGathering clientInfoGathering);
+
+    public int addBooking(ClientInfoGathering client, LodgeInfo lodgeInfo, int travelAgencyId);
+    public boolean setBookingState(int bookingId, BookingState bookingState);
 }

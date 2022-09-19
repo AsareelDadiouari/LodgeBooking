@@ -16,7 +16,8 @@ public class Booking {
     private int id;
     private BookingState state;
 
-    public Booking(Client client,
+    public Booking(int id,
+                   Client client,
                    String lodgeName,
                    String lodgeAddress,
                    int numberOfRooms,
@@ -115,8 +116,8 @@ public class Booking {
                 "[Lodge name : " + lodgeName + "]" +
                 "[Lodge address : " + lodgeAddress + "]" +
                 "[Room Type : " + roomType.toString() + "]" +
-                "[Check In : " + checkIn.toString() + "]" +
-                "[Check Out : " + checkOut.toString() + "]";
+                "[Check In : " + (checkIn == null ? "" : checkIn.toString()) + "]" +
+                "[Check Out : " + (checkOut == null ? "" : checkOut.toString()) + "]";
 
         return result;
     }

@@ -3,17 +3,14 @@ package Database;
 import Client.entities.Client;
 import Client.entities.ClientInfoGathering;
 import Lodge.entities.*;
-import Manager.entities.BookingRecord;
 import Manager.entities.TravelAgency;
+import Reservation.entities.BookingRecord;
 import Reservation.entities.BookingState;
 
 import java.security.SecureRandom;
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Classe de gestion de la base de données du système
@@ -192,8 +189,12 @@ public class DatabaseManager implements IDatabaseManager {
             while (resultSet.next()) {
                 room.setId(resultSet.getInt("id"));
                 room.setAvailable(resultSet.getBoolean("available"));
-                room.setCheckOut(LocalDate.parse(resultSet.getString("checkOut")));
-                room.setCheckIn(LocalDate.parse(resultSet.getString("checkIn")));
+                if (!resultSet.getString("checkOut").isEmpty())
+                    room.setCheckOut(LocalDate.parse(resultSet.getString("checkOut")));
+
+                if(!resultSet.getString("checkIn").isEmpty())
+                    room.setCheckIn(LocalDate.parse(resultSet.getString("checkIn")));
+
                 room.setPrice(resultSet.getDouble("price"));
                 room.setRoomType(RoomType.valueOf(resultSet.getString("roomType")));
             }
@@ -237,6 +238,7 @@ public class DatabaseManager implements IDatabaseManager {
                     lodgeInfo.setAddress(getLodgeAddressById(resultSet3.getInt("id")));
 
                 lodgeInfo.setAvailableRooms(rooms);
+                lodgeInfo.setId(id);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -245,13 +247,15 @@ public class DatabaseManager implements IDatabaseManager {
         return lodgeInfo;
     }
 
-    public BookingRecord getBookingRecordById(int id) {
+    public Reservation.entities.BookingRecord getBookingRecordById(int id) {
         BookingRecord bookingRecord = new BookingRecord();
 
         List<Client> clients = new ArrayList<>();
         List<LodgeInfo> lodgesInfo = new ArrayList<>();
 
         String sql = "SELECT * FROM BookingRecord WHERE id = ?";
+        String sql2 = "SELECT ClientInfoGathering.roomType FROM ClientInfoGathering LEFT JOIN Room " +
+                "ON ClientInfoGathering.clientId = ?";
         //String sql2 = "SELECT email FROM Client LEFT JOIN BookingRecord ON Client.email = BookingRecord.clientId";
         //String sql3 = "SELECT LodgeInfo.id FROM LodgeInfo LEFT JOIN BookingRecord ON LodgeInfo.id = BookingRecord.accomodationId";
 
@@ -267,30 +271,22 @@ public class DatabaseManager implements IDatabaseManager {
                 bookingRecord.setBookingState(BookingState.valueOf(resultSet.getString("bookingState")));
             }
 
+            PreparedStatement statement2 = connection.prepareStatement(sql2);
+            statement2.setString(1, clients.get(0).getEmail());
+
+            ResultSet resultSet2 = statement2.executeQuery();
+
+            if (resultSet2.next()){
+                /*!!! Find a way to get room type and
+                    also resolved the accommodation NullPointerException
+                    !!!
+                */
+                bookingRecord.setTypeOfRoom(resultSet2.getString("roomType"));
+            }
+
             bookingRecord.setClient(clients.get(0));
             bookingRecord.setAccommodations(lodgesInfo);
-
-            /*PreparedStatement statement = connection.prepareStatement(sql);
-            Statement statement2 = connection.createStatement();
-            Statement statement3 = connection.createStatement();
-            statement.setInt(1, id);
-
-            ResultSet resultSet = statement.executeQuery();
-            ResultSet resultSet2 = statement2.executeQuery(sql2);
-            ResultSet resultSet3 = statement3.executeQuery(sql3);
-
-            while (resultSet.next()) {
-                bookingRecord.setId(resultSet.getInt("id"));
-
-                if (resultSet2.next())
-                    bookingRecord.setClient(getClientByEmail(resultSet2.getString("email")));
-
-                while (resultSet3.next()) {
-                    lodgesInfo.add(getLodgeInfoById(resultSet3.getInt("id")));
-                }
-
-                bookingRecord.setAccommodations(lodgesInfo);
-            }*/
+            bookingRecord.setId(id);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -411,6 +407,73 @@ public class DatabaseManager implements IDatabaseManager {
         }
     }
 
+    public boolean setBookingState(int bookingId, BookingState bookingState){
+        String sql = "UPDATE BookingRecord " +
+                "SET bookingState = ? WHERE id = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, "COMPLETE");
+            statement.setInt(2, bookingId);
+
+            statement.executeUpdate();
+            System.out.println("Réservation confirmée");
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    @Override
+    public LodgeInfo findLodgeFromClientDemands(ClientInfoGathering clientInfoGathering) {
+        String sql = "SELECT LodgeInfo.id FROM LodgeInfo LEFT JOIN LodgeAdress ON LodgeInfo.id = LodgeAdress.lodgeInfoId " +
+                "LEFT JOIN ClientInfoGathering CIG on LodgeAdress.id = CIG.lodgeAdressId " +
+                "LEFT JOIN Room ON LodgeInfo.id = Room.lodgeInfoId " +
+                "WHERE LodgeAdress.city = ? AND LodgeAdress.country = ? AND Room.roomType = ?";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, clientInfoGathering.getLodgeAddress().getCity());
+            statement.setString(2, clientInfoGathering.getLodgeAddress().getCountry());
+            statement.setString(3, clientInfoGathering.getRoomType().name());
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next())
+                return getLodgeInfoById(resultSet.getInt("id"));
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Override
+    public int addBooking(ClientInfoGathering client, LodgeInfo lodgeInfo, int travelAgencyId) {
+        String sql = "INSERT INTO BookingRecord(clientId, id, accomodationId, travelAgencyId, bookingState) VALUES (?,?,?,?,?)";
+        int id = 0;
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            id = new SecureRandom().nextInt();
+
+            statement.setString(1, client.getClient().getEmail());
+            statement.setInt(2, id);
+            statement.setInt(3, lodgeInfo.getId());
+            statement.setInt(4, travelAgencyId);
+            statement.setString(5, "PENDING");
+
+            statement.executeUpdate();
+            System.out.println("Reservation ajouté");
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
     public void addClientInfoGathering(ClientInfoGathering clientInfoGathering){
         String sql = "INSERT INTO ClientInfoGathering(clientId, lodgeAdressId, id, typeOfLodge, roomType, checkIn, checkout, maximumPrice, particularNeed, isFulfilled) " +
                 "VALUES (?,?,?,?,?,?,?,?,?,?)";
@@ -431,7 +494,7 @@ public class DatabaseManager implements IDatabaseManager {
             addWantedServices(clientInfoGathering.getWantedServices(), clientInfoGathering.getClient().getEmail());
 
             statement.executeUpdate();
-            System.out.println("Données sauvegardé");
+            System.out.println("Demande client ajouté");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -539,8 +602,8 @@ public class DatabaseManager implements IDatabaseManager {
 
         try{
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, new SecureRandom().nextInt(Integer.MAX_VALUE));
-            statement.setInt(2, new SecureRandom().nextInt(Integer.MAX_VALUE));
+            statement.setInt(1, lodge.getId());
+            statement.setInt(2, lodge.getRooms().size());
             statement.setString(3, lodge.getName());
 
             statement.executeUpdate();
