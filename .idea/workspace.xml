@@ -5,37 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b04a982b-cd49-435f-8184-de7720b8c994" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/9742c7e8-bed7-492e-8831-02b7b96c8eb1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/9742c7e8-bed7-492e-8831-02b7b96c8eb1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/ClientMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/ClientMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Database/DatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/DatabaseManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Database/IDatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/IDatabaseManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Database/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Manager/entities/BookingRecord.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Manager/entities/TravelAgency.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Manager/entities/TravelAgency.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Reservation/BookingBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Reservation/BookingBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Reservation/BookingMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Reservation/BookingMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Reservation/SystemeGestionReservationsImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Reservation/SystemeGestionReservationsImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Reservation/entities/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Reservation/entities/Booking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Reservation/entities/BookingRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Reservation/entities/BookingRecord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Reservation/entities/BookingState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Reservation/entities/BookingState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Reservation/interfaces/SystemeGestionReservations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Reservation/interfaces/SystemeGestionReservations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/ClientMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/ClientMain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Client/entities/ClientInfoGathering.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/entities/ClientInfoGathering.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Database/DatabaseManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Database/DatabaseManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Database/IDatabaseManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Database/IDatabaseManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Lodge/entities/LodgeAddress.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Lodge/entities/LodgeAddress.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Manager/entities/BookingRecord.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Manager/entities/TravelAgency.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Manager/entities/TravelAgency.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Reservation/BookingBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Reservation/BookingBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Reservation/BookingMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Reservation/BookingMain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Reservation/SystemeGestionReservationsImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Reservation/SystemeGestionReservationsImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Reservation/entities/Booking.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Reservation/entities/Booking.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Reservation/entities/BookingRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Reservation/entities/BookingRecord.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Reservation/entities/BookingState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Reservation/entities/BookingState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Reservation/interfaces/SystemeGestionReservations.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Reservation/interfaces/SystemeGestionReservations.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,6 +62,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "database.data.extractors.current.export.id": "JSON-Groovy.json.groovy",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
@@ -152,6 +128,8 @@
       <workItem from="1663449260561" duration="54000" />
       <workItem from="1663449332350" duration="882000" />
       <workItem from="1663508754903" duration="27373000" />
+      <workItem from="1663572685923" duration="80000" />
+      <workItem from="1663606513078" duration="3335000" />
     </task>
     <servers />
   </component>

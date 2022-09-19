@@ -54,4 +54,5 @@ public interface IDatabaseManager {
 
     public int addBooking(ClientInfoGathering client, LodgeInfo lodgeInfo, int travelAgencyId);
     public boolean setBookingState(int bookingId, BookingState bookingState);
+    public List<BookingRecord> getBookings();
 }

@@ -100,6 +100,25 @@ public class DatabaseManager implements IDatabaseManager {
         return rooms;
     }
 
+    @Override
+    public List<BookingRecord> getBookings() {
+        List<BookingRecord> bookings = new ArrayList<>();
+        String sql = "SELECT id FROM BookingRecord";
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next())
+                bookings.add(getBookingRecordById(resultSet.getInt("id")));
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return bookings;
+    }
+
     public List<ClientInfoGathering> getClientInfoGatheringList(){
         List<ClientInfoGathering> clientInfoGatherings = new ArrayList<>();
         String sql = "SELECT * FROM ClientInfoGathering";
@@ -412,7 +431,7 @@ public class DatabaseManager implements IDatabaseManager {
                 "SET bookingState = ? WHERE id = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, "COMPLETE");
+            statement.setString(1, bookingState.name());
             statement.setInt(2, bookingId);
 
             statement.executeUpdate();

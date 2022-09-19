@@ -8,6 +8,7 @@ import Lodge.LodgeMain;
 import Lodge.entities.Lodge;
 import Lodge.entities.LodgeInfo;
 import Reservation.entities.Booking;
+import Reservation.entities.BookingRecord;
 import Reservation.entities.BookingState;
 import Reservation.interfaces.SystemeGestionReservations;
 
@@ -150,6 +151,35 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
             database.addLodge(lodge);
     }
 
+    @Override
+    public void seeListOfBooking() {
+        clearScreen();
+        System.out.println("1-Reservations en attentes");
+        System.out.println("2-Reservations completées");
+
+        Scanner sc = new Scanner(System.in);
+
+        List<BookingRecord> bookingRecords = database.getBookings();
+
+        System.out.print("Choix : ");
+
+        switch (sc.next()){
+            case "1":
+                List<BookingRecord> pendingBookings = bookingRecords.stream().filter(booking -> booking.getBookingState() == BookingState.PENDING).collect(Collectors.toList());
+                System.out.println(pendingBookings.size());
+                pendingBookings.forEach(System.out::println);
+                break;
+            case "2":
+                List<BookingRecord> confirmedBookings = bookingRecords.stream().filter(booking -> booking.getBookingState() == BookingState.CONFIRMED).collect(Collectors.toList());
+                System.out.println(confirmedBookings.size());
+                confirmedBookings.forEach(System.out::println);
+                break;
+            default:
+                System.out.println("Commande non reconnue, retour...");
+                break;
+        }
+    }
+
     public void Start() {
         Scanner sc = new Scanner(System.in);
 
@@ -171,7 +201,7 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
                         clearScreen();
                         break;
                     case "5":
-                        clearScreen();
+                        seeListOfBooking();
                         break;
                     case "6":
                         return;
