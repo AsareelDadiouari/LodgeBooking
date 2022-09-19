@@ -1,7 +1,7 @@
 package Reservation.entities;
 
 public enum BookingState {
-    REQUESTED,
+    CANCELLED,
     PENDING,
     CONFIRMED
 }

@@ -10,4 +10,5 @@ public interface SystemeGestionReservations {
     void addClient();
     void addLodgeInformation();
     void seeListOfBooking();
+    void cancelBooking();
 }

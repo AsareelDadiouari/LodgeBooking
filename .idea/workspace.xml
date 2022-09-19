@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b04a982b-cd49-435f-8184-de7720b8c994" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/9742c7e8-bed7-492e-8831-02b7b96c8eb1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/9742c7e8-bed7-492e-8831-02b7b96c8eb1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Database/DatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/DatabaseManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Database/IDatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/IDatabaseManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Reservation/SystemeGestionReservationsImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Reservation/SystemeGestionReservationsImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Reservation/entities/BookingRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Reservation/entities/BookingRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Reservation/entities/BookingState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Reservation/entities/BookingState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Reservation/interfaces/SystemeGestionReservations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Reservation/interfaces/SystemeGestionReservations.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -129,7 +128,7 @@
       <workItem from="1663449332350" duration="882000" />
       <workItem from="1663508754903" duration="27373000" />
       <workItem from="1663572685923" duration="80000" />
-      <workItem from="1663606513078" duration="3335000" />
+      <workItem from="1663606513078" duration="5178000" />
     </task>
     <servers />
   </component>

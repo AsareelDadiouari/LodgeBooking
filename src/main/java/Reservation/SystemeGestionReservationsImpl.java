@@ -166,18 +166,51 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
         switch (sc.next()){
             case "1":
                 List<BookingRecord> pendingBookings = bookingRecords.stream().filter(booking -> booking.getBookingState() == BookingState.PENDING).collect(Collectors.toList());
-                System.out.println(pendingBookings.size());
                 pendingBookings.forEach(System.out::println);
                 break;
             case "2":
                 List<BookingRecord> confirmedBookings = bookingRecords.stream().filter(booking -> booking.getBookingState() == BookingState.CONFIRMED).collect(Collectors.toList());
-                System.out.println(confirmedBookings.size());
                 confirmedBookings.forEach(System.out::println);
                 break;
             default:
                 System.out.println("Commande non reconnue, retour...");
                 break;
         }
+    }
+
+    @Override
+    public void cancelBooking() {
+        clearScreen();
+        System.out.println("--- Reservations ---");
+        List<BookingRecord> bookingRecords = database.getBookings();
+        Scanner sc = new Scanner(System.in);
+        AtomicInteger clientIndex = new AtomicInteger();
+
+        if (bookingRecords.size() > 0) {
+            bookingRecords.forEach(booking -> {
+                System.out.println("\t\t--- [" + clientIndex.getAndIncrement() + "] ---");
+                System.out.println(booking);
+            });
+
+            System.out.print("Choix : ");
+            BookingRecord chosenBooking;
+
+            try{
+                chosenBooking = bookingRecords.get(Integer.parseInt(sc.next()));
+            }catch (Exception e){
+                e.printStackTrace();
+                System.out.println("Mauvais choix !");
+                return;
+            }
+
+            database.setBookingState(chosenBooking.getId(), BookingState.CANCELLED);
+
+            if (database.getBookingRecordById(chosenBooking.getId()).getBookingState() == BookingState.CANCELLED)
+                System.out.println("Réservation annulée avec succès !");
+            else
+                System.out.println("Une erreur s'est produite lors de l'annulation");
+        } else
+            System.out.println("Aucune reservation en cours ou déja effectuée");
     }
 
     public void Start() {
@@ -198,7 +231,7 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
                         reservationImpl();
                         break;
                     case "4":
-                        clearScreen();
+                        cancelBooking();
                         break;
                     case "5":
                         seeListOfBooking();

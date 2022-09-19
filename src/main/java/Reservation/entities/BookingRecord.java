@@ -84,6 +84,7 @@ public class BookingRecord {
     @Override
     public String toString() {
         return "Client : [" + clientInfo.getFullName() + "]\n" +
-                "Lodge : [Type: " + typeOfRoom + "][Name: " + lodgeName + "][Duration: " + duration + "]";
+                "Lodge : [Type: " + typeOfRoom + "][Name: " + lodgeName + "][Duration: " + duration + "]\n" +
+                "Etat : " + bookingState.name();
     }
 }
