@@ -98,11 +98,19 @@ public class BookingMain {
         switch (sc.next()){
             case "1":
                 List<BookingRecord> pendingBookings = bookingRecords.stream().filter(booking -> booking.getBookingState() == BookingState.PENDING).collect(Collectors.toList());
-                pendingBookings.forEach(System.out::println);
+
+                if (pendingBookings.isEmpty())
+                    System.out.println("Aucune reservation trouvée");
+                else
+                    pendingBookings.forEach(System.out::println);
                 break;
             case "2":
                 List<BookingRecord> confirmedBookings = bookingRecords.stream().filter(booking -> booking.getBookingState() == BookingState.CONFIRMED).collect(Collectors.toList());
-                confirmedBookings.forEach(System.out::println);
+
+                if (confirmedBookings.isEmpty())
+                    System.out.println("Aucune reservation trouvée");
+                else
+                    confirmedBookings.forEach(System.out::println);
                 break;
             default:
                 System.out.println("Commande non reconnue, retour...");

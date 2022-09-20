@@ -57,7 +57,7 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
     @Override
     public void reservationImpl() {
         clearScreen();
-        List<ClientInfoGathering> clientRequests = null;
+        List<ClientInfoGathering> clientRequests;
         Scanner sc = new Scanner(System.in);
 
         while (true){
@@ -195,7 +195,7 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
         }
     }
 
-    public static void clearScreen() {
+    private static void clearScreen() {
         /*try {
             if(System.getProperty("os.name").startsWith("Windows") )
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
