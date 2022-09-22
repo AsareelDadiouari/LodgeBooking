@@ -14,45 +14,47 @@ import java.util.List;
 import java.util.Set;
 
 public interface IDatabaseManager {
-    public List<Client> getClients();
+    List<Client> getClients();
 
-    public List<LodgeAddress> getLodgeAddresses();
+    List<LodgeAddress> getLodgeAddresses();
 
-    public List<Room> getRooms();
+    List<Room> getRooms();
 
-    public List<TravelAgency> getTravelAgencies();
+    List<TravelAgency> getTravelAgencies();
 
-    public Client getClientByEmail(String email);
+    Client getClientByEmail(String email);
 
-    public Room getRoomById(int id);
+    Room getRoomById(int id);
 
-    public LodgeInfo getLodgeInfoById(int id);
+    LodgeInfo getLodgeInfoById(int id);
 
-    public BookingRecord getBookingRecordById(int id);
+    BookingRecord getBookingRecordById(int id);
 
-    public LodgeAddress getLodgeAddressById(int id);
+    LodgeAddress getLodgeAddressById(int id);
 
-    public void addClient(Client client);
+    void addClient(Client client);
 
-    public void addRoom(Room room, int lodgeInfoId);
+    void addRoom(Room room, int lodgeInfoId);
 
-    public void addLodgeAddress(LodgeAddress lodgeAddress, int lodgeInfoId);
+    void addLodgeAddress(LodgeAddress lodgeAddress, int lodgeInfoId);
 
-    public void addLodge(Lodge lodge);
+    void addLodge(Lodge lodge);
 
-    public void addClientInfoGathering(ClientInfoGathering clientInfoGathering);
+    void addClientInfoGathering(ClientInfoGathering clientInfoGathering);
 
     List<ClientInfoGathering> getClientInfoGatheringList();
 
-    public void addWantedServices(Set<String> wantedService, String clientEmail);
+    void addWantedServices(Set<String> wantedService, String clientEmail);
 
-    public Set<String> getListOfWantedServicesByClientId(String clientEmail);
+    Set<String> getListOfWantedServicesByClientId(String clientEmail);
 
-    public void setClientDemandState(boolean state,  int clientInfo);
+    void setClientDemandState(boolean state, int clientInfo);
 
-    public LodgeInfo findLodgeFromClientDemands(ClientInfoGathering clientInfoGathering);
+    LodgeInfo findLodgeFromClientDemands(ClientInfoGathering clientInfoGathering);
 
-    public int addBooking(ClientInfoGathering client, LodgeInfo lodgeInfo, int travelAgencyId);
-    public boolean setBookingState(int bookingId, BookingState bookingState);
-    public List<BookingRecord> getBookings();
+    int addBooking(ClientInfoGathering client, LodgeInfo lodgeInfo, int travelAgencyId);
+
+    boolean setBookingState(int bookingId, BookingState bookingState);
+
+    List<BookingRecord> getBookings();
 }

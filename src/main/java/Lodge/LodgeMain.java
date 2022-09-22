@@ -8,11 +8,11 @@ public class LodgeMain {
     private final LodgeInfo lodgeInfo;
     private Lodge lodge;
 
-    public LodgeMain(){
+    public LodgeMain() {
         lodgeInfo = new LodgeInfo();
     }
 
-    public LodgeInfo gatherInfos(){
+    public LodgeInfo gatherInfos() {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("--- Renseignement Hebergement ---");
@@ -24,7 +24,7 @@ public class LodgeMain {
                 + "4- Couette");
         System.out.print("Choix : ");
 
-        switch (sc.next()){
+        switch (sc.next()) {
             case "1":
                 lodgeInfo.setLodgeType(LodgeType.HOTEL);
                 lodge = new Hotel();
@@ -64,7 +64,7 @@ public class LodgeMain {
 
         boolean continuer;
         List<Room> rooms = new ArrayList<>();
-        do{
+        do {
             System.out.println("Ajouter un type de chambre souhaité : " +
                     "\n1-Simple" +
                     "\n2-Double" +
@@ -92,7 +92,7 @@ public class LodgeMain {
             System.out.print("Ajouter une autre chambre ? [oui/non] : ");
             continuer = !Objects.equals(sc.next(), "non");
 
-        }while (continuer);
+        } while (continuer);
         lodgeInfo.setAvailableRooms(rooms);
 
         do {
@@ -118,7 +118,7 @@ public class LodgeMain {
         return lodgeInfo;
     }
 
-    public boolean saveInfos(){
+    public boolean saveInfos() {
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Voulez vous sauvegarder les données ? [oui/non]");

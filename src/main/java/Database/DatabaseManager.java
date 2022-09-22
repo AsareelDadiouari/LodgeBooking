@@ -10,7 +10,10 @@ import Reservation.entities.BookingState;
 import java.security.SecureRandom;
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Classe de gestion de la base de données du système
@@ -112,27 +115,27 @@ public class DatabaseManager implements IDatabaseManager {
             while (resultSet.next())
                 bookings.add(getBookingRecordById(resultSet.getInt("id")));
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return bookings;
     }
 
-    public List<ClientInfoGathering> getClientInfoGatheringList(){
+    public List<ClientInfoGathering> getClientInfoGatheringList() {
         List<ClientInfoGathering> clientInfoGatherings = new ArrayList<>();
         String sql = "SELECT * FROM ClientInfoGathering";
 
-        try{
+        try {
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(sql);
 
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 ClientInfoGathering clientInfoGathering = getClientInfoGatheringById(resultSet.getInt("id"));
                 clientInfoGatherings.add(clientInfoGathering);
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -211,7 +214,7 @@ public class DatabaseManager implements IDatabaseManager {
                 if (!resultSet.getString("checkOut").isEmpty())
                     room.setCheckOut(LocalDate.parse(resultSet.getString("checkOut")));
 
-                if(!resultSet.getString("checkIn").isEmpty())
+                if (!resultSet.getString("checkIn").isEmpty())
                     room.setCheckIn(LocalDate.parse(resultSet.getString("checkIn")));
 
                 room.setPrice(resultSet.getDouble("price"));
@@ -284,7 +287,7 @@ public class DatabaseManager implements IDatabaseManager {
 
             ResultSet resultSet = statement.executeQuery();
 
-            if (resultSet.next()){
+            if (resultSet.next()) {
                 clients.add(getClientByEmail(resultSet.getString("clientId")));
                 lodgesInfo.add(getLodgeInfoById(resultSet.getInt("accomodationId")));
                 bookingRecord.setBookingState(BookingState.valueOf(resultSet.getString("bookingState")));
@@ -295,7 +298,7 @@ public class DatabaseManager implements IDatabaseManager {
 
             ResultSet resultSet2 = statement2.executeQuery();
 
-            if (resultSet2.next()){
+            if (resultSet2.next()) {
                 /*!!! Find a way to get room type and
                     also resolved the accommodation NullPointerException
                     !!!
@@ -339,8 +342,7 @@ public class DatabaseManager implements IDatabaseManager {
     }
 
 
-
-    public ClientInfoGathering getClientInfoGatheringById(int id){
+    public ClientInfoGathering getClientInfoGatheringById(int id) {
         ClientInfoGathering clientInfoGathering = new ClientInfoGathering();
 
         String sql = "SELECT * FROM ClientInfoGathering WHERE id = ?";
@@ -353,7 +355,7 @@ public class DatabaseManager implements IDatabaseManager {
 
             ResultSet resultSet = statement.executeQuery();
 
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 clientInfoGathering.setClient(getClientByEmail(resultSet.getString("clientId")));
                 clientInfoGathering.setLodgeAddress(getLodgeAddressById(resultSet.getInt("lodgeAdressId")));
                 clientInfoGathering.setId(resultSet.getInt("id"));
@@ -383,18 +385,18 @@ public class DatabaseManager implements IDatabaseManager {
             ResultSet resultSet3 = statement.executeQuery();*/
 
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return clientInfoGathering;
     }
 
-    public Set<String> getListOfWantedServicesByClientId(String clientEmail){
+    public Set<String> getListOfWantedServicesByClientId(String clientEmail) {
         Set<String> wantedServices = new HashSet<>();
         String sql = "SELECT service FROM WantedServices WHERE clientId = ?";
 
-        try{
+        try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, clientEmail);
 
@@ -403,7 +405,7 @@ public class DatabaseManager implements IDatabaseManager {
             while (resultSet.next())
                 wantedServices.add(resultSet.getString("service"));
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -421,12 +423,12 @@ public class DatabaseManager implements IDatabaseManager {
             statement.setInt(2, clientInfo);
 
             statement.executeUpdate();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public boolean setBookingState(int bookingId, BookingState bookingState){
+    public boolean setBookingState(int bookingId, BookingState bookingState) {
         String sql = "UPDATE BookingRecord " +
                 "SET bookingState = ? WHERE id = ?";
         try {
@@ -437,7 +439,7 @@ public class DatabaseManager implements IDatabaseManager {
             statement.executeUpdate();
             System.out.println("Réservation confirmée");
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -462,7 +464,7 @@ public class DatabaseManager implements IDatabaseManager {
             if (resultSet.next())
                 return getLodgeInfoById(resultSet.getInt("id"));
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -487,13 +489,13 @@ public class DatabaseManager implements IDatabaseManager {
             statement.executeUpdate();
             System.out.println("Reservation ajouté");
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return id;
     }
 
-    public void addClientInfoGathering(ClientInfoGathering clientInfoGathering){
+    public void addClientInfoGathering(ClientInfoGathering clientInfoGathering) {
         String sql = "INSERT INTO ClientInfoGathering(clientId, lodgeAdressId, id, typeOfLodge, roomType, checkIn, checkout, maximumPrice, particularNeed, isFulfilled) " +
                 "VALUES (?,?,?,?,?,?,?,?,?,?)";
 
@@ -519,10 +521,10 @@ public class DatabaseManager implements IDatabaseManager {
         }
     }
 
-    public void addWantedServices(Set<String> wantedService, String clientEmail){
+    public void addWantedServices(Set<String> wantedService, String clientEmail) {
         String sql = "INSERT INTO WantedServices(id, clientId) VALUES (?,?)";
 
-        try{
+        try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, new SecureRandom().nextInt());
             statement.setString(2, clientEmail);
@@ -532,22 +534,22 @@ public class DatabaseManager implements IDatabaseManager {
             });
 
             statement.executeUpdate();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void addSingleWantedService(String service, String clientEmail){
+    private void addSingleWantedService(String service, String clientEmail) {
         String sql = "INSERT INTO WantedServices(id, clientId, service) VALUES (?,?,?)";
 
-        try{
+        try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, new SecureRandom().nextInt());
             statement.setString(2, clientEmail);
             statement.setString(3, service);
 
             statement.executeUpdate();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -610,7 +612,7 @@ public class DatabaseManager implements IDatabaseManager {
         }
     }
 
-    public void addLodge(Lodge lodge){
+    public void addLodge(Lodge lodge) {
         String sql = "INSERT INTO LodgeInfo(id, numberOfRooms, lodgeName) " +
                 "VALUES (?, ?, ?)";
 
@@ -619,7 +621,7 @@ public class DatabaseManager implements IDatabaseManager {
         });
         addLodgeAddress(lodge.getAddress(), lodge.getId());
 
-        try{
+        try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, lodge.getId());
             statement.setInt(2, lodge.getRooms().size());
@@ -627,7 +629,7 @@ public class DatabaseManager implements IDatabaseManager {
 
             statement.executeUpdate();
             System.out.println("Données sauvegardé");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

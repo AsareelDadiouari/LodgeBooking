@@ -36,56 +36,56 @@ public class LodgeInfo {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Set<String> getOfferedServices() {
         return offeredServices;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setOfferedServices(Set<String> offeredServices) {
+        this.offeredServices = offeredServices;
     }
 
     public LodgeAddress getAddress() {
         return address;
     }
 
+    public void setAddress(LodgeAddress address) {
+        this.address = address;
+    }
+
     public int getNumberOfRooms() {
         return numberOfRooms;
-    }
-
-    public List<Room> getAvailableRooms() {
-        return availableRooms;
-    }
-
-    public String getLodgeName() {
-        return lodgeName;
-    }
-
-    public LodgeType getLodgeType() {
-        return lodgeType;
     }
 
     public void setNumberOfRooms(int numberOfRooms) {
         this.numberOfRooms = numberOfRooms;
     }
 
-    public void setLodgeName(String lodgeName) {
-        this.lodgeName = lodgeName;
+    public List<Room> getAvailableRooms() {
+        return availableRooms;
     }
 
     public void setAvailableRooms(List<Room> availableRooms) {
         this.availableRooms = availableRooms;
     }
 
-    public void setAddress(LodgeAddress address) {
-        this.address = address;
+    public String getLodgeName() {
+        return lodgeName;
+    }
+
+    public void setLodgeName(String lodgeName) {
+        this.lodgeName = lodgeName;
+    }
+
+    public LodgeType getLodgeType() {
+        return lodgeType;
     }
 
     public void setLodgeType(LodgeType lodgeType) {
         this.lodgeType = lodgeType;
-    }
-
-    public void setOfferedServices(Set<String> offeredServices) {
-        this.offeredServices = offeredServices;
     }
 
     @Override
@@ -96,7 +96,7 @@ public class LodgeInfo {
                 + "\n|Type : " + lodgeType.name()
                 + "\n\t" + address
                 + "|Number of rooms : " + availableRooms.size() + "\n"
-                + "\t|--- Services --- \n[" + String.join( "->", offeredServices.toArray(new String[0])) + "]";
+                + "\t|--- Services --- \n[" + String.join("->", offeredServices.toArray(new String[0])) + "]";
 
         return result;
     }

@@ -63,89 +63,88 @@ public class ClientInfoGathering {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public LodgeAddress getLodgeAddress() {
         return lodgeAddress;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-
-    public RoomType getRoomType() {
-        return roomType;
-    }
-
-    public LocalDate getCheckOut() {
-        return checkOut;
-    }
-
-    public LocalDate getCheckIn() {
-        return checkIn;
-    }
-
-    public double getMaximumPriceToPay() {
-        return maximumPriceToPay;
-    }
-
-    public LodgeType getTypeOfLodge() {
-        return typeOfLodge;
-    }
-
-    public String getParticularNeed() {
-        return particularNeed;
-    }
-
-    public boolean isFulfilled() {
-        return fulfilled;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public void setCheckIn(LocalDate checkIn) {
-        this.checkIn = checkIn;
-    }
-
-    public void setCheckOut(LocalDate checkOut) {
-        this.checkOut = checkOut;
-    }
-
-    public void setRoomType(RoomType roomType) {
-        this.roomType = roomType;
-    }
-
-    public void setWantedServices(Set<String> wantedServices) {
-        this.wantedServices = wantedServices;
-    }
-
-    public void setTypeOfLodge(LodgeType typeOfLodge) {
-        this.typeOfLodge = typeOfLodge;
-    }
-
-    public Set<String> getWantedServices() {
-        return wantedServices;
     }
 
     public void setLodgeAddress(LodgeAddress lodgeAddress) {
         this.lodgeAddress = lodgeAddress;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public RoomType getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(RoomType roomType) {
+        this.roomType = roomType;
+    }
+
+    public LocalDate getCheckOut() {
+        return checkOut;
+    }
+
+    public void setCheckOut(LocalDate checkOut) {
+        this.checkOut = checkOut;
+    }
+
+    public LocalDate getCheckIn() {
+        return checkIn;
+    }
+
+    public void setCheckIn(LocalDate checkIn) {
+        this.checkIn = checkIn;
+    }
+
+    public double getMaximumPriceToPay() {
+        return maximumPriceToPay;
+    }
+
     public void setMaximumPriceToPay(double maximumPriceToPay) {
         this.maximumPriceToPay = maximumPriceToPay;
+    }
+
+    public LodgeType getTypeOfLodge() {
+        return typeOfLodge;
+    }
+
+    public void setTypeOfLodge(LodgeType typeOfLodge) {
+        this.typeOfLodge = typeOfLodge;
+    }
+
+    public String getParticularNeed() {
+        return particularNeed;
     }
 
     public void setParticularNeed(String particularNeed) {
         this.particularNeed = particularNeed;
     }
 
+    public boolean isFulfilled() {
+        return fulfilled;
+    }
+
     public void setFulfilled(boolean fulfilled) {
         this.fulfilled = fulfilled;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Set<String> getWantedServices() {
+        return wantedServices;
+    }
+
+    public void setWantedServices(Set<String> wantedServices) {
+        this.wantedServices = wantedServices;
     }
 
     @Override

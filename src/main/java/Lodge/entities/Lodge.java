@@ -36,6 +36,10 @@ public abstract class Lodge {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getTypeOfLodge() {
         return this.getClass().getSimpleName();
     }
@@ -44,24 +48,36 @@ public abstract class Lodge {
         return rooms;
     }
 
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public LodgeService getService() {
         return service;
     }
 
+    public void setService(LodgeService service) {
+        this.service = service;
+    }
+
     public LodgeAddress getAddress() {
         return address;
     }
 
-    public LodgeInfo getInfos() {
-        return infos;
-    }
-
     public void setAddress(LodgeAddress address) {
         this.address = address;
+    }
+
+    public LodgeInfo getInfos() {
+        return infos;
     }
 
     public void setInfos(LodgeInfo infos) {
@@ -70,22 +86,6 @@ public abstract class Lodge {
         this.service = new LodgeService();
         this.name = this.infos.getLodgeName();
         this.address = this.infos.getAddress();
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setRooms(List<Room> rooms) {
-        this.rooms = rooms;
-    }
-
-    public void setService(LodgeService service) {
-        this.service = service;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     @Override

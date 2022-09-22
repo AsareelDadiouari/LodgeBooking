@@ -10,14 +10,13 @@ import Reservation.entities.BookingState;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class BookingMain {
-    private String clientEmail;
     private final IDatabaseManager databaseManager;
+    private String clientEmail;
     private BookingBuilder bookingBuilder;
 
     public BookingMain(DatabaseManager database) {
@@ -55,9 +54,9 @@ public class BookingMain {
             System.out.print("Choix : ");
             BookingRecord chosenBooking;
 
-            try{
+            try {
                 chosenBooking = bookingRecords.get(Integer.parseInt(sc.next()));
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("Mauvais choix !");
                 return;
@@ -95,7 +94,7 @@ public class BookingMain {
 
         System.out.print("Choix : ");
 
-        switch (sc.next()){
+        switch (sc.next()) {
             case "1":
                 List<BookingRecord> pendingBookings = bookingRecords.stream().filter(booking -> booking.getBookingState() == BookingState.PENDING).collect(Collectors.toList());
 

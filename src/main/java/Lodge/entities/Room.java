@@ -39,36 +39,36 @@ public class Room {
         return price;
     }
 
-    public LocalDate getCheckIn() {
-        return checkIn;
-    }
-
-    public LocalDate getCheckOut() {
-        return checkOut;
-    }
-
-    public RoomType getRoomType() {
-        return roomType;
-    }
-
-    public boolean isAvailable() {
-        return isAvailable;
-    }
-
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public LocalDate getCheckIn() {
+        return checkIn;
     }
 
     public void setCheckIn(LocalDate checkIn) {
         this.checkIn = checkIn;
     }
 
+    public LocalDate getCheckOut() {
+        return checkOut;
+    }
+
     public void setCheckOut(LocalDate checkOut) {
         this.checkOut = checkOut;
     }
 
+    public RoomType getRoomType() {
+        return roomType;
+    }
+
     public void setRoomType(RoomType roomType) {
         this.roomType = roomType;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
     }
 
     public void setAvailable(boolean available) {

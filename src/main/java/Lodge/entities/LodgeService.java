@@ -24,11 +24,11 @@ public class LodgeService {
      */
     private String[] availableServices;
 
-    public LodgeService(){
+    public LodgeService() {
         availableServices = new String[]{""};
     }
 
-    public LodgeService(Set<String> offeredServices){
+    public LodgeService(Set<String> offeredServices) {
         this.availableServices = offeredServices.toArray(String[]::new);
     }
 

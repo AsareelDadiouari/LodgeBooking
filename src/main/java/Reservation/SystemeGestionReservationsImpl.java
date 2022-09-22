@@ -8,7 +8,6 @@ import Lodge.LodgeMain;
 import Lodge.entities.Lodge;
 import Lodge.entities.LodgeInfo;
 import Reservation.entities.Booking;
-import Reservation.entities.BookingRecord;
 import Reservation.entities.BookingState;
 import Reservation.interfaces.SystemeGestionReservations;
 
@@ -19,11 +18,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class SystemeGestionReservationsImpl implements SystemeGestionReservations {
-    private SystemeGestionReservations bookingBuilder;
     private final IDatabaseManager database;
     private final ClientMain clientMain;
     private final LodgeMain lodgeMain;
     private final BookingMain bookingMain;
+    private SystemeGestionReservations bookingBuilder;
     private String managerName;
 
     public SystemeGestionReservationsImpl() {
@@ -31,6 +30,18 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
         clientMain = new ClientMain();
         lodgeMain = new LodgeMain();
         bookingMain = new BookingMain((DatabaseManager) database);
+    }
+
+    private static void clearScreen() {
+        /*try {
+            if(System.getProperty("os.name").startsWith("Windows") )
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            else
+                new ProcessBuilder("/usr/bin/", "clear").inheritIO().start().waitFor();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }*/
     }
 
     @Override
@@ -60,10 +71,10 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
         List<ClientInfoGathering> clientRequests;
         Scanner sc = new Scanner(System.in);
 
-        while (true){
+        while (true) {
             clientRequests = database.getClientInfoGatheringList();
 
-            if(clientRequests.isEmpty()){
+            if (clientRequests.isEmpty()) {
                 System.out.println("Impossible de faire une reservation" +
                         ", aucune demande en attente");
                 System.out.println("Appuyer pour revenir en arriere");
@@ -72,8 +83,7 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
             }
 
             List<ClientInfoGathering> unfulfilledRequests = clientRequests.stream().filter(req -> !req.isFulfilled()).collect(Collectors.toList());
-            if (!unfulfilledRequests.isEmpty())
-            {
+            if (!unfulfilledRequests.isEmpty()) {
                 System.out.println("\t--- DEMANDES EN ATTENTES ---");
                 AtomicInteger clientIndex = new AtomicInteger();
                 unfulfilledRequests.forEach(req -> {
@@ -86,7 +96,7 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
                 ClientInfoGathering chosenClient;
                 try {
                     chosenClient = unfulfilledRequests.get(clientChoiceNumber);
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                     break;
                 }
@@ -96,14 +106,14 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
                 System.out.println("[" + chosenClient.getClient().getFullName() + "]");
 
                 System.out.print("Chercher un hébergement pour ce client ? (oui/non) ");
-                switch (sc.next()){
-                    case "oui" :
+                switch (sc.next()) {
+                    case "oui":
                         Booking foundBooking = bookingMain.searchForBooking(chosenClient);
 
-                        if (foundBooking != null){
+                        if (foundBooking != null) {
                             System.out.println("Voulez vous effectuer la reservation ? (oui/non) ");
 
-                            if (Objects.equals(sc.next(), "oui")){
+                            if (Objects.equals(sc.next(), "oui")) {
                                 System.out.println("ID : " + foundBooking.getId());
                                 if (database.setBookingState(foundBooking.getId(), BookingState.CONFIRMED))
                                     database.setClientDemandState(true, chosenClient.getId());
@@ -112,14 +122,14 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
                         } else
                             System.out.println("Reservation non confirmée");
                         break;
-                    case "non" :
+                    case "non":
                         database.setClientDemandState(false, chosenClient.getId());
                         break;
                     default:
                         System.out.println("Incorrect choice");
                         break;
                 }
-            }else {
+            } else {
                 System.out.println("Aucune demande de reservations en attente," +
                         " appuyer pour quittter");
                 sc.nextLine();
@@ -137,7 +147,7 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
         if (clientMain.saveClientInfoQuestion())
             database.addClient(clientInfos.getClient());
 
-        if(clientMain.saveClientRequest())
+        if (clientMain.saveClientRequest())
             database.addClientInfoGathering(clientInfos);
     }
 
@@ -166,7 +176,7 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
     public void Start() {
         Scanner sc = new Scanner(System.in);
 
-        try{
+        try {
             while (true) {
                 mainMenu();
                 System.out.print("Choix : ");
@@ -190,20 +200,8 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
                         return;
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private static void clearScreen() {
-        /*try {
-            if(System.getProperty("os.name").startsWith("Windows") )
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            else
-                new ProcessBuilder("/usr/bin/", "clear").inheritIO().start().waitFor();
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }*/
     }
 }

@@ -38,8 +38,8 @@ public class BookingBuilder {
         this.id = id;
     }
 
-    public BookingBuilder(BookingRecord bookingRecord){
-        if (bookingRecord.getDuration() != null){
+    public BookingBuilder(BookingRecord bookingRecord) {
+        if (bookingRecord.getDuration() != null) {
             this.checkIn = LocalDate.parse(bookingRecord.getDuration().split(" ")[0]);
             this.checkOut = LocalDate.parse(bookingRecord.getDuration().split(" ")[1]);
         }

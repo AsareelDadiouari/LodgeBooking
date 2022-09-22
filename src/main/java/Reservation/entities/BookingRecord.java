@@ -29,6 +29,10 @@ public class BookingRecord {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public List<LodgeInfo> getAccomodations() {
         return accommodations;
     }
@@ -41,12 +45,24 @@ public class BookingRecord {
         return lodgeName;
     }
 
+    public void setLodgeName(String lodgeName) {
+        this.lodgeName = lodgeName;
+    }
+
     public String getDuration() {
         return duration;
     }
 
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
     public String getTypeOfRoom() {
         return typeOfRoom;
+    }
+
+    public void setTypeOfRoom(String typeOfRoom) {
+        this.typeOfRoom = typeOfRoom;
     }
 
     public BookingState getBookingState() {
@@ -57,28 +73,12 @@ public class BookingRecord {
         this.bookingState = bookingState;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setAccommodations(List<LodgeInfo> accomodations) {
         this.accommodations = accomodations;
     }
 
-    public void setLodgeName(String lodgeName) {
-        this.lodgeName = lodgeName;
-    }
-
     public void setClient(Client clientInfo) {
         this.clientInfo = clientInfo;
-    }
-
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
-
-    public void setTypeOfRoom(String typeOfRoom) {
-        this.typeOfRoom = typeOfRoom;
     }
 
     @Override

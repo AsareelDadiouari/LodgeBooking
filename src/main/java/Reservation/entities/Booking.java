@@ -40,68 +40,68 @@ public class Booking {
         return numberOfRooms;
     }
 
+    public void setNumberOfRooms(int numberOfRooms) {
+        this.numberOfRooms = numberOfRooms;
+    }
+
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getLodgeName() {
         return lodgeName;
     }
 
-    public LocalDate getCheckIn() {
-        return checkIn;
-    }
-
-    public LocalDate getCheckOut() {
-        return checkOut;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public RoomType getRoomType() {
-        return roomType;
-    }
-
-    public String getLodgeAddress() {
-        return lodgeAddress;
-    }
-
-    public BookingState getState() {
-        return state;
-    }
-
-    public void setNumberOfRooms(int numberOfRooms) {
-        this.numberOfRooms = numberOfRooms;
-    }
-
     public void setLodgeName(String lodgeName) {
         this.lodgeName = lodgeName;
     }
 
-    public void setCheckOut(LocalDate checkOut) {
-        this.checkOut = checkOut;
-    }
-
-    public void setRoomType(RoomType roomType) {
-        this.roomType = roomType;
+    public LocalDate getCheckIn() {
+        return checkIn;
     }
 
     public void setCheckIn(LocalDate checkIn) {
         this.checkIn = checkIn;
     }
 
+    public LocalDate getCheckOut() {
+        return checkOut;
+    }
+
+    public void setCheckOut(LocalDate checkOut) {
+        this.checkOut = checkOut;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public RoomType getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(RoomType roomType) {
+        this.roomType = roomType;
+    }
+
+    public String getLodgeAddress() {
+        return lodgeAddress;
     }
 
     public void setLodgeAddress(String lodgeAddress) {
         this.lodgeAddress = lodgeAddress;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public BookingState getState() {
+        return state;
     }
 
     public void setState(BookingState state) {
