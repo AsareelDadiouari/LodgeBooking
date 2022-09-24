@@ -6,25 +6,26 @@
   <component name="ChangeListManager">
     <list default="true" id="b04a982b-cd49-435f-8184-de7720b8c994" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/entities/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/entities/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Client/entities/ClientInfoGathering.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Client/entities/ClientInfoGathering.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Database/DatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/DatabaseManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Database/IDatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/IDatabaseManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Lodge/LodgeMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Lodge/LodgeMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Lodge/entities/Lodge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Lodge/entities/Lodge.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Lodge/entities/LodgeAddress.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Lodge/entities/LodgeAddress.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Lodge/entities/LodgeInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Lodge/entities/LodgeInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Lodge/entities/LodgeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Lodge/entities/LodgeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Lodge/entities/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Lodge/entities/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Manager/entities/TravelAgency.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Manager/entities/TravelAgency.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Reservation/BookingBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Reservation/BookingBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Reservation/BookingMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Reservation/BookingMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Reservation/SystemeGestionReservationsImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Reservation/SystemeGestionReservationsImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Reservation/entities/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Reservation/entities/Booking.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Reservation/entities/BookingRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Reservation/entities/BookingRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Reservation/entities/BookingState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Reservation/entities/BookingState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Reservation/interfaces/SystemeGestionReservations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Reservation/interfaces/SystemeGestionReservations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/archetype-resources/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/archetype-resources/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/entities/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/entities/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Client/entities/ClientInfoGathering.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Client/entities/ClientInfoGathering.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Database/DatabaseManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Database/DatabaseManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Lodge/entities/Lodge.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Lodge/entities/Lodge.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Lodge/entities/LodgeAddress.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Lodge/entities/LodgeAddress.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Lodge/entities/LodgeInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Lodge/entities/LodgeInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Lodge/entities/Room.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Lodge/entities/Room.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Manager/entities/TravelAgency.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Manager/entities/TravelAgency.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Reservation/BookingMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Reservation/BookingMain.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Reservation/SystemeGestionReservationsImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Reservation/SystemeGestionReservationsImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Reservation/entities/Booking.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Reservation/entities/Booking.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Reservation/entities/BookingRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Reservation/entities/BookingRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/archetype-resources/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/archetype-resources/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +149,8 @@
       <workItem from="1663693371917" duration="4000" />
       <workItem from="1663697384726" duration="6734000" />
       <workItem from="1663794636518" duration="712000" />
-      <workItem from="1663810976239" duration="1545000" />
+      <workItem from="1663810976239" duration="6592000" />
+      <workItem from="1663987905057" duration="441000" />
     </task>
     <servers />
   </component>

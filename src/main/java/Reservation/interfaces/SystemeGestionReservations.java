@@ -2,6 +2,10 @@ package Reservation.interfaces;
 
 import Reservation.entities.Booking;
 
+/**
+ * Interface implémentant les fonctionnalités principales
+ * de l'application
+ */
 public interface SystemeGestionReservations {
     Booking buildBooking();
 

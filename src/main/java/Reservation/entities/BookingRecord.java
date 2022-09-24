@@ -6,6 +6,9 @@ import Lodge.entities.LodgeInfo;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Représente les données d'une réservation en base de données
+ */
 public class BookingRecord {
     private int id;
     private Client clientInfo;

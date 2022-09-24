@@ -8,6 +8,10 @@ import Reservation.entities.BookingState;
 
 import java.time.LocalDate;
 
+/**
+ * Classe Builder de reservation qui permet de créer une reservation
+ * via celui ci
+ */
 public class BookingBuilder {
     private Client client;
     private String lodgeName;

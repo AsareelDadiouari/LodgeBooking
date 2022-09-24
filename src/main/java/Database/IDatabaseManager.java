@@ -13,6 +13,9 @@ import Reservation.entities.BookingState;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Représente l'interface des méthodes implémentés pour le système de base de données
+ */
 public interface IDatabaseManager {
     List<Client> getClients();
 

@@ -17,6 +17,10 @@ import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+/**
+ * Système principale qui gère l'interface graphique et
+ * les fonctionnalités principales
+ */
 public class SystemeGestionReservationsImpl implements SystemeGestionReservations {
     private final IDatabaseManager database;
     private final ClientMain clientMain;

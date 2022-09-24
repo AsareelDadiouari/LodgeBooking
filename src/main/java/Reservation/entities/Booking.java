@@ -5,7 +5,9 @@ import Lodge.entities.RoomType;
 
 import java.time.LocalDate;
 
-
+/**
+ * Classe qui représente une réservation
+ */
 public class Booking {
     private Client client;
     private String lodgeName;
