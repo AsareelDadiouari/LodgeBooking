@@ -84,9 +84,10 @@ public class BookingMain {
         return bookingBuilder.buildBooking();
     }
 
-    public void listOfBooking() {
-        System.out.println("1-Reservations en attentes");
-        System.out.println("2-Reservations completées");
+    public void listOfBooking(int travelAgencyId) {
+        System.out.println("1-Toutes Reservations en attentes");
+        System.out.println("2-Toutes Reservations completées");
+        System.out.println("3-Reservations effectués par l'agence");
 
         Scanner sc = new Scanner(System.in);
 
@@ -110,6 +111,14 @@ public class BookingMain {
                     System.out.println("Aucune reservation trouvée");
                 else
                     confirmedBookings.forEach(System.out::println);
+                break;
+            case "3":
+                List<BookingRecord> bookings = databaseManager.getBookingRecordByTravelAgencyId(travelAgencyId);
+
+                if (bookings.isEmpty())
+                    System.out.println("Aucune reservation trouvée");
+                else
+                    bookings.forEach(System.out::println);
                 break;
             default:
                 System.out.println("Commande non reconnue, retour...");

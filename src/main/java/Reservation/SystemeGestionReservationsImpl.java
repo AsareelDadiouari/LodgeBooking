@@ -171,7 +171,7 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
     @Override
     public void seeListOfBooking() {
         clearScreen();
-        bookingMain.listOfBooking();
+        bookingMain.listOfBooking(agency.getId());
     }
 
     @Override
@@ -183,7 +183,7 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
     public void Start() {
         Scanner sc = new Scanner(System.in);
 
-        String agencyChoicePrompt = "";
+        String agencyChoicePrompt;
         do{
             agencyMenu();
             System.out.print("Choix : ");
@@ -198,7 +198,6 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
                 String managerName = sc.nextLine();
 
                 TravelAgency agentExist = database.getTravelAgencyByManagerName(managerName);
-                System.out.println("Travel Agent : " + agentExist);
 
                 if (agentExist == null){
                     TravelAgency travelAgency = new TravelAgency(managerName, Optional.of(new ArrayList<>()));
@@ -207,8 +206,6 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
                 } else {
                     this.agency = agentExist;
                 }
-
-                System.out.println("This.Agency = " + this.agency);
             }
 
         } while (!agencyChoicePrompt.equals("1"));

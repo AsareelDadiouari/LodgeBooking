@@ -687,4 +687,26 @@ public class DatabaseManager implements IDatabaseManager {
         return null;
     }
 
+    @Override
+    public List<BookingRecord> getBookingRecordByTravelAgencyId(int travelAgencyId) {
+        List<BookingRecord> bookingRecords = new ArrayList<>();
+        String sql = "SELECT id FROM BookingRecord WHERE travelAgencyId = ?";
+
+        try{
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, travelAgencyId);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next())
+                bookingRecords.add(getBookingRecordById(resultSet.getInt("id")));
+
+            return bookingRecords;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
 }

@@ -8,21 +8,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Database/DatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/DatabaseManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Database/IDatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/IDatabaseManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Database/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Database/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Manager/entities/TravelAgency.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Manager/entities/TravelAgency.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Reservation/BookingMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Reservation/BookingMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Reservation/SystemeGestionReservationsImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Reservation/SystemeGestionReservationsImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Reservation/interfaces/SystemeGestionReservations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Reservation/interfaces/SystemeGestionReservations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Database/DatabaseManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Database/DatabaseManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Database/IDatabaseManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Database/IDatabaseManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Manager/entities/TravelAgency.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Manager/entities/TravelAgency.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Reservation/BookingBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Reservation/BookingBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Reservation/BookingMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Reservation/BookingMain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Reservation/SystemeGestionReservationsImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Reservation/entities/Booking.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Reservation/entities/Booking.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Reservation/entities/BookingRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Reservation/entities/BookingRecord.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Reservation/entities/BookingState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Reservation/entities/BookingState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Reservation/interfaces/SystemeGestionReservations.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Reservation/interfaces/SystemeGestionReservations.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Reservation/SystemeGestionReservationsImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Reservation/SystemeGestionReservationsImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +137,7 @@
       <workItem from="1663810976239" duration="6592000" />
       <workItem from="1663987905057" duration="625000" />
       <workItem from="1663988541635" duration="58000" />
-      <workItem from="1664243656466" duration="3745000" />
+      <workItem from="1664243656466" duration="5051000" />
     </task>
     <servers />
   </component>
