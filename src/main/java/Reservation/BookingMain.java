@@ -72,12 +72,12 @@ public class BookingMain {
             System.out.println("Aucune reservation en cours ou déja effectuée");
     }
 
-    public Booking searchForBooking(ClientInfoGathering client) {
+    public Booking searchForBooking(ClientInfoGathering client, int travelAgencyId) {
         LodgeInfo lodgeInfo = databaseManager.findLodgeFromClientDemands(client);
 
         System.out.println("Un logement à " + lodgeInfo.getAddress().getFullAddress() + " trouvé.");
 
-        int bookingId = databaseManager.addBooking(client, lodgeInfo, 0);
+        int bookingId = databaseManager.addBooking(client, lodgeInfo, travelAgencyId);
         System.out.println("Booking ID : " + bookingId);
 
         bookingBuilder = new BookingBuilder(databaseManager.getBookingRecordById(bookingId));

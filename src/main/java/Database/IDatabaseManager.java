@@ -60,4 +60,6 @@ public interface IDatabaseManager {
     boolean setBookingState(int bookingId, BookingState bookingState);
 
     List<BookingRecord> getBookings();
+    public void addTravelAgency(TravelAgency travelAgency);
+    public TravelAgency getTravelAgencyByManagerName(String managerName);
 }

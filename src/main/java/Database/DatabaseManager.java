@@ -566,7 +566,7 @@ public class DatabaseManager implements IDatabaseManager {
             statement.setString(5, client.getPhoneNumber());
 
             statement.executeUpdate();
-            System.out.println("Données sauvegardé");
+            System.out.println("Client Ajouté [" + client.getFullName() + "]");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -587,6 +587,7 @@ public class DatabaseManager implements IDatabaseManager {
             statement.setInt(7, lodgeInfoId);
 
             statement.executeUpdate();
+            System.out.println("Chambre ajouté [" + room.getRoomType().name() + "]");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -606,7 +607,7 @@ public class DatabaseManager implements IDatabaseManager {
             statement.setInt(6, lodgeInfoId);
 
             statement.executeUpdate();
-            System.out.println("Données sauvegardé");
+            System.out.println("Adresse d'hébergement ajouté");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -628,9 +629,62 @@ public class DatabaseManager implements IDatabaseManager {
             statement.setString(3, lodge.getName());
 
             statement.executeUpdate();
-            System.out.println("Données sauvegardé");
+            System.out.println("Hebergement ajouté");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    public void addTravelAgency(TravelAgency travelAgency){
+        String sql = "INSERT INTO TravelAgency(id, name) " +
+                "VALUES (?, ?)";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, travelAgency.getId());
+            statement.setString(2, travelAgency.getManagerName());
+
+            statement.executeUpdate();
+            System.out.println("Agence crééer");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public TravelAgency getTravelAgencyByManagerName(String managerName) {
+        TravelAgency agency = new TravelAgency();
+        List<BookingRecord> bookings =  new ArrayList<>();
+        String sql = "SELECT * FROM TravelAgency WHERE name = ?";
+        String sql2 = "SELECT id FROM BookingRecord WHERE travelAgencyId = ?";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            PreparedStatement statement2 = connection.prepareStatement(sql2);
+            statement.setString(1, managerName);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()){
+                agency.setId(resultSet.getInt("id"));
+                agency.setManagerName(resultSet.getString("name"));
+
+                statement2.setInt(1, agency.getId());
+
+                ResultSet resultSet2 = statement2.executeQuery();
+
+                while (resultSet2.next())
+                    bookings.add(getBookingRecordById(resultSet2.getInt("id")));
+
+                agency.setBookingRecords(bookings);
+                return agency;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
 }

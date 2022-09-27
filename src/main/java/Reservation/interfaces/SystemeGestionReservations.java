@@ -11,7 +11,7 @@ public interface SystemeGestionReservations {
 
     void mainMenu();
 
-    void reservationMenu();
+    void agencyMenu();
 
     void reservationImpl();
 

@@ -2,6 +2,7 @@ package Manager.entities;
 
 import Reservation.entities.BookingRecord;
 
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +27,7 @@ public class TravelAgency {
     }
 
     public TravelAgency(String managerName, Optional<List<BookingRecord>> bookingRecords) {
+        this.id = new SecureRandom().nextInt();
         this.managerName = managerName;
         bookingRecords.ifPresent(records -> this.bookingRecords = records);
     }

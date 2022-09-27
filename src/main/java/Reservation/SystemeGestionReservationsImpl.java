@@ -7,13 +7,13 @@ import Database.IDatabaseManager;
 import Lodge.LodgeMain;
 import Lodge.entities.Lodge;
 import Lodge.entities.LodgeInfo;
+import Manager.entities.TravelAgency;
 import Reservation.entities.Booking;
+import Reservation.entities.BookingRecord;
 import Reservation.entities.BookingState;
 import Reservation.interfaces.SystemeGestionReservations;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -27,7 +27,8 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
     private final LodgeMain lodgeMain;
     private final BookingMain bookingMain;
     private SystemeGestionReservations bookingBuilder;
-    private String managerName;
+    private TravelAgency agency;
+
 
     public SystemeGestionReservationsImpl() {
         database = new DatabaseManager();
@@ -65,8 +66,10 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
     }
 
     @Override
-    public void reservationMenu() {
-        System.out.println("--- RESERVATION ---");
+    public void agencyMenu() {
+        System.out.println("--- Agence ---");
+        System.out.println("1- Nom du manager d'agence");
+        System.out.println("0- Quitter");
     }
 
     @Override
@@ -112,7 +115,7 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
                 System.out.print("Chercher un hébergement pour ce client ? (oui/non) ");
                 switch (sc.next()) {
                     case "oui":
-                        Booking foundBooking = bookingMain.searchForBooking(chosenClient);
+                        Booking foundBooking = bookingMain.searchForBooking(chosenClient, agency.getId());
 
                         if (foundBooking != null) {
                             System.out.println("Voulez vous effectuer la reservation ? (oui/non) ");
@@ -179,6 +182,37 @@ public class SystemeGestionReservationsImpl implements SystemeGestionReservation
 
     public void Start() {
         Scanner sc = new Scanner(System.in);
+
+        String agencyChoicePrompt = "";
+        do{
+            agencyMenu();
+            System.out.print("Choix : ");
+            agencyChoicePrompt = sc.next();
+
+            sc.nextLine();
+
+            if (agencyChoicePrompt.equals("0"))
+                return;
+            else if (agencyChoicePrompt.equals("1")){
+                System.out.print("Nom de l'agent : ");
+                String managerName = sc.nextLine();
+
+                TravelAgency agentExist = database.getTravelAgencyByManagerName(managerName);
+                System.out.println("Travel Agent : " + agentExist);
+
+                if (agentExist == null){
+                    TravelAgency travelAgency = new TravelAgency(managerName, Optional.of(new ArrayList<>()));
+                    database.addTravelAgency(travelAgency);
+                    this.agency = travelAgency;
+                } else {
+                    this.agency = agentExist;
+                }
+
+                System.out.println("This.Agency = " + this.agency);
+            }
+
+        } while (!agencyChoicePrompt.equals("1"));
+
 
         try {
             while (true) {
